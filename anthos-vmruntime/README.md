@@ -141,7 +141,7 @@ Available Commands:
 ---
 ###  Create a new VM in the Anthos on bare metal cluster
 
-Here we use an already created and [publicly hosted `qcow2` image](https://storage.googleapis.com/abm-vm-images).
+Here we use an already created and [publicly hosted `qcow2` image](https://storage.googleapis.com/pos-vm-images/pos-vm.qcow2).
 This image was created based off of a GCE VM. Before the image was created the
 [Point-of-Sale](https://github.com/GoogleCloudPlatform/point-of-sale) sample
 application was installed inside the GCE VM. Further, a `systemd` service was
@@ -158,10 +158,9 @@ create the VM using `kubectl apply -f pos-vm.yaml`.
 ```sh
 kubectl virt create vm pos-vm \
 --boot-disk-size=80Gi \
---boot-disk-storage-class=standard \
+--memory=4Gi \
 --cpu=2 \
---image=https://storage.googleapis.com/abm-vm-images/ubuntu-2004-pos.qcow2 \
---memory=4Gi
+--image=https://storage.googleapis.com/pos-vm-images/pos-vm.qcow2
 ```
 
 ```sh
@@ -359,32 +358,21 @@ Annotations:  <none>
 Events:       <none>
 ```
 
-Note that there are erros indicating that the `api-server-svc` was not found.
+Note that there are errors indicating that the `api-server-svc` was not found.
 This is because we deleted the resources created by default in [an earlier step](#cleanup-the-resources-created-by-default-in-the-installation-guide).
 We will have to re-create this `Service` pointing to the
 `VirtualMachineInstance`. This way, we can get the `Ingress` working once again
 and reach the sample application inside the VM via the `Ingress` LB IP.
 
 Copy the [`pos-service.yaml`](pos-service.yaml) file into the admin workstation
-VM. Then, update the file to include the IP address of the VM as a service
-`Endpoint`. Finally apply the changes to the cluster.
+and apply to the cluster.
 
 ```sh
-# you should have the pos-service.yaml copied into the admin workstation
-
-# retrieve the IP address of the virtual machine we created
-export VM_IP=$(kubectl get vmi/pos-vm -o jsonpath='{.status.interfaces[0].ipAddress}')
-
-# update the pos-service.yaml with the virtual machine's IP address
-sed -i "s/VM_IP/${VM_IP}/g" pos-service.yaml
-
-# apply the changes to the Anthos on bare metal cluster
 kubectl apply -f pos-service.yaml
 ```
 ```sh
 # expected output
 service/api-server-svc created
-endpoints/api-server-svc created
 ```
 ---
 ### Access the VM workload via the `Ingress Loadbalancer`

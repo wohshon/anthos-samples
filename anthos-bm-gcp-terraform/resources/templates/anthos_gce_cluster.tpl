@@ -17,7 +17,7 @@ metadata:
   namespace: ${clusterId}-ns
 spec:
   type: hybrid
-  anthosBareMetalVersion: 1.11.0
+  anthosBareMetalVersion: 1.11.1
   gkeConnect:
     projectID: ${projectId}
   controlPlane:
@@ -56,7 +56,7 @@ spec:
     lvpShare:
       numPVUnderSharedPath: 5
       path: /mnt/localpv-share
-      storageClassName: standard
+      storageClassName: local-shared
 ---
 apiVersion: baremetal.cluster.gke.io/v1
 kind: NodePool
