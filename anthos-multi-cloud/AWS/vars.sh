@@ -1,0 +1,19 @@
+export CLUSTER_NAME=aws-cluster-mr
+export PROJECT_ID=anthos-hub-1651669032
+export GCP_LOCATION=asia-southeast1
+export AWS_REGION=ap-southeast-1
+export VPC_ID=vpc-0e524d47761c91c77
+export SUBNET_IDS=subnet-0943d2143983fb4e9,subnet-0baae63694fcb7033,subnet-00c9d896de0e84e7b
+export CLUSTER_VERSION=1.22.8-gke.200
+export CONFIG_ENCRYPTION_KMS_KEY_ARN=arn:aws:kms:ap-southeast-1:333688656005:key/ce5c2213-8792-4671-94ec-3effe24f25c0
+export DATABASE_ENCRYPTION_KMS_KEY_ARN=arn:aws:kms:ap-southeast-1:333688656005:key/ce5c2213-8792-4671-94ec-3effe24f25c0
+export CP_IAM_ROLE_ARN=arn:aws:iam::333688656005:role/aws-cluster-mr-anthos-api-role
+export CP_IAM_INSTANCE_PROFILE=aws-cluster-mr-anthos-cp-instance-profile
+export SERVICE_ADDRESS_CIDR_BLOCKS=10.1.0.0/16
+export NODE_POOL_IAM_INSTANCE_PROFILE=aws-cluster-mr-anthos-np-instance-profile
+export NODE_POOL_INSTANCE_TYPE=t3.xlarge
+#export NODE_POOL_SUBNET=
+#pod_address_cidr_blocks="10.2.0.0/16"
+#service_address_cidr_blocks="10.1.0.0/16"
+#SSH_KEY_PAIR_NAME=
+
